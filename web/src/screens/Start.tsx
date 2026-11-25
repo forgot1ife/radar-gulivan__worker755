@@ -478,9 +478,9 @@ export function Start({ onStart }: Props) {
                   <span className="field-label">{t('start.provider')}</span>
                   <select value={provider} onChange={(e) => setProvider(e.target.value as Provider)} className="select">
                     {(models?.providers ?? [
+                      { id: 'runware', label: 'Runware' },
                       { id: 'openrouter', label: 'OpenRouter' },
                       { id: 'gateway', label: 'Vercel AI Gateway' },
-                      { id: 'runware', label: 'Runware' },
                     ]).map((p) => (
                       <option key={p.id} value={p.id}>
                         {p.label}

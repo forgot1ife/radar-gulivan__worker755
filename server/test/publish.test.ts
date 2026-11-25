@@ -113,7 +113,7 @@ test('without a server key, a shift needs the player\'s own key', async () => {
     const models = await api('GET', '/api/models');
     assert.equal(models.json.free, false);
     assert.deepEqual(models.json.models, []);
-    assert.deepEqual(models.json.providers.map((p: { id: string }) => p.id), ['openrouter', 'gateway', 'anthropic', 'openai', 'deepseek', 'google', 'vertex', 'runware']);
+    assert.deepEqual(models.json.providers.map((p: { id: string }) => p.id), ['runware', 'openrouter', 'gateway', 'anthropic', 'openai', 'deepseek', 'google', 'vertex']);
     assert.equal((await api('GET', '/api/models?provider=openrouter')).json.models.length, 2);
     assert.equal((await api('GET', '/api/models?provider=x')).status, 400);
     const r = await api('POST', '/api/sessions', {});

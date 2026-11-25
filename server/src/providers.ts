@@ -25,6 +25,8 @@ export interface ProviderInfo {
 }
 
 export const PROVIDERS: ProviderInfo[] = [
+  // First: Runware sponsors the free shifts.
+  { id: 'runware', label: 'Runware', keyUrl: 'https://runware.ai/api-keys' },
   { id: 'openrouter', label: 'OpenRouter', keyUrl: 'https://openrouter.ai/settings/keys' },
   { id: 'gateway', label: 'Vercel AI Gateway', keyUrl: 'https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%2Fapi-keys' },
   { id: 'anthropic', label: 'Anthropic', keyUrl: 'https://console.anthropic.com/settings/keys' },
@@ -32,7 +34,6 @@ export const PROVIDERS: ProviderInfo[] = [
   { id: 'deepseek', label: 'DeepSeek', keyUrl: 'https://platform.deepseek.com/api_keys' },
   { id: 'google', label: 'Google', keyUrl: 'https://aistudio.google.com/apikey' },
   { id: 'vertex', label: 'Vertex AI', keyUrl: 'https://cloud.google.com/vertex-ai/generative-ai/docs/start/express-mode/overview' },
-  { id: 'runware', label: 'Runware', keyUrl: 'https://runware.ai/api-keys' },
 ];
 
 /**
