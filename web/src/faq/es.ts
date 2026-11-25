@@ -90,7 +90,7 @@ export const es: Faq = {
         {
           id: 'cost',
           q: '¿Cuánto cuesta?',
-          a: 'Al iniciar sesión con Google o GitHub en la pantalla de inicio recibes un saldo inicial, suficiente para más o menos un turno con el modelo predeterminado. Después pagas por lo que usas: recargas de $10, $20, $50 o $200, con un solo pago, y cada llamada a un modelo cuesta el doble de lo que nos cobra su proveedor. Los modelos más grandes gastan el saldo más rápido; tras tu primera recarga puedes elegir cualquiera. El saldo no caduca. Si se acaba a mitad de turno, el turno espera mientras recargas.\n\nCon tu propia clave de API no necesitas cuenta ni saldo. Le pagas a tu proveedor por lo que el manager lee y escribe.\n\nO <a href="https://github.com/gulivan/worker755#run-it">ejecuta el juego por tu cuenta</a>.',
+          a: 'Al iniciar sesión con Google o GitHub en la pantalla de inicio recibes un saldo inicial, suficiente para unos diez turnos con el modelo predeterminado. Después pagas por lo que usas: recargas de $10, $20, $50 o $200, con un solo pago, y cada llamada a un modelo cuesta el doble de lo que nos cobra su proveedor. Los modelos más grandes gastan el saldo más rápido; tras tu primera recarga puedes elegir cualquiera. El saldo no caduca. Si se acaba a mitad de turno, el turno espera mientras recargas.\n\nCon tu propia clave de API no necesitas cuenta ni saldo. Le pagas a tu proveedor por lo que el manager lee y escribe.\n\nO <a href="https://github.com/gulivan/worker755#run-it">ejecuta el juego por tu cuenta</a>.',
         },
         {
           id: 'providers',

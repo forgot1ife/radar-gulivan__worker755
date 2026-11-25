@@ -90,7 +90,7 @@ export const fr: Faq = {
         {
           id: 'cost',
           q: 'Combien ça coûte ?',
-          a: 'En te connectant avec Google ou GitHub sur l’écran d’accueil, tu reçois un crédit de départ, de quoi faire à peu près un service avec le modèle par défaut. Ensuite, tu paies ce que tu utilises : des recharges de $10, $20, $50 ou $200, payées une seule fois, et chaque appel à un modèle coûte le double de ce que son fournisseur nous facture. Les grands modèles consomment le crédit plus vite ; après ta première recharge, tu peux choisir n’importe lequel. Le crédit n’expire pas. S’il s’épuise en plein service, le service attend que tu recharges.\n\nAvec ta propre clé API, pas besoin de compte ni de crédit. Tu paies ton fournisseur pour ce que le manager lit et écrit.\n\nOu <a href="https://github.com/gulivan/worker755#run-it">héberge le jeu toi-même</a>.',
+          a: 'En te connectant avec Google ou GitHub sur l’écran d’accueil, tu reçois un crédit de départ, de quoi faire une dizaine de services avec le modèle par défaut. Ensuite, tu paies ce que tu utilises : des recharges de $10, $20, $50 ou $200, payées une seule fois, et chaque appel à un modèle coûte le double de ce que son fournisseur nous facture. Les grands modèles consomment le crédit plus vite ; après ta première recharge, tu peux choisir n’importe lequel. Le crédit n’expire pas. S’il s’épuise en plein service, le service attend que tu recharges.\n\nAvec ta propre clé API, pas besoin de compte ni de crédit. Tu paies ton fournisseur pour ce que le manager lit et écrit.\n\nOu <a href="https://github.com/gulivan/worker755#run-it">héberge le jeu toi-même</a>.',
         },
         {
           id: 'providers',

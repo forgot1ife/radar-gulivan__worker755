@@ -451,3 +451,39 @@ test('with a director model, the user complains about the limit in their own wor
     await app.close();
   }
 });
+
+test('accounts: raising the starter gives every existing account the difference once', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'w755-starter-'));
+  const file = join(dir, 'accounts.db');
+  try {
+    // A database from before accounts kept their starter: everyone got $0.25.
+    const old = new DatabaseSync(file);
+    old.exec(`
+      CREATE TABLE accounts (id TEXT PRIMARY KEY, email TEXT NOT NULL, name TEXT NOT NULL, balance INTEGER NOT NULL DEFAULT 0, granted INTEGER NOT NULL DEFAULT 0, created_at INTEGER NOT NULL);
+      INSERT INTO accounts VALUES ('spent', 's@example.com', 'Spent', 0, 250000, 1), ('some', 'o@example.com', 'Some', 100000, 250000, 2), ('paid', 'p@example.com', 'Paid', 2000000, 2100000, 3);
+    `);
+    old.close();
+    let a = new Accounts(file, 500_000);
+    assert.equal(a.balance('spent'), 250_000, 'a used-up starter gets the difference');
+    assert.equal(a.get('some')!.balance, 350_000);
+    assert.equal(a.get('some')!.granted, 500_000);
+    assert.equal(a.balance('paid'), 2_250_000, 'a top-up keeps its credit and gets the difference too');
+    a.close();
+    // Opening it again, or with a smaller starter, changes nothing.
+    a = new Accounts(file, 500_000);
+    assert.equal(a.balance('spent'), 250_000);
+    a.close();
+    a = new Accounts(file, 250_000);
+    assert.equal(a.balance('spent'), 250_000);
+    const fresh = a.signIn('google', 'g-new', 'n@example.com', 'New').account;
+    assert.equal(fresh.balance, 250_000);
+    a.close();
+    // A new account made on the smaller starter is raised later like the rest.
+    a = new Accounts(file, 500_000);
+    assert.equal(a.balance(fresh.id), 500_000);
+    assert.equal(a.balance('spent'), 250_000);
+    a.close();
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});

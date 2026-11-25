@@ -90,7 +90,7 @@ export const de: Faq = {
         {
           id: 'cost',
           q: 'Was kostet das?',
-          a: 'Wenn du dich auf dem Startbildschirm mit Google oder GitHub anmeldest, bekommst du ein Startguthaben, etwa genug für eine Schicht mit dem Standardmodell. Danach zahlst du, was du nutzt: Aufladungen über $10, $20, $50 oder $200, einmalig bezahlt, und jeder Aufruf eines Modells kostet das Doppelte dessen, was uns sein Anbieter berechnet. Größere Modelle verbrauchen das Guthaben schneller; nach deiner ersten Aufladung kannst du jedes wählen. Guthaben verfällt nicht. Geht es mitten in einer Schicht aus, wartet die Schicht, bis du aufgeladen hast.\n\nMit deinem eigenen API-Schlüssel brauchst du weder Konto noch Guthaben. Du bezahlst deinem Anbieter, was der Manager liest und schreibt.\n\nOder <a href="https://github.com/gulivan/worker755#run-it">betreibe das Spiel selbst</a>.',
+          a: 'Wenn du dich auf dem Startbildschirm mit Google oder GitHub anmeldest, bekommst du ein Startguthaben, etwa genug für zehn Schichten mit dem Standardmodell. Danach zahlst du, was du nutzt: Aufladungen über $10, $20, $50 oder $200, einmalig bezahlt, und jeder Aufruf eines Modells kostet das Doppelte dessen, was uns sein Anbieter berechnet. Größere Modelle verbrauchen das Guthaben schneller; nach deiner ersten Aufladung kannst du jedes wählen. Guthaben verfällt nicht. Geht es mitten in einer Schicht aus, wartet die Schicht, bis du aufgeladen hast.\n\nMit deinem eigenen API-Schlüssel brauchst du weder Konto noch Guthaben. Du bezahlst deinem Anbieter, was der Manager liest und schreibt.\n\nOder <a href="https://github.com/gulivan/worker755#run-it">betreibe das Spiel selbst</a>.',
         },
         {
           id: 'providers',

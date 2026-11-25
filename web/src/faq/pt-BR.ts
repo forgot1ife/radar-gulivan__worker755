@@ -90,7 +90,7 @@ export const ptBR: Faq = {
         {
           id: 'cost',
           q: 'Quanto custa?',
-          a: 'Ao entrar com o Google ou o GitHub na tela inicial, você ganha um crédito inicial, suficiente para mais ou menos um turno com o modelo padrão. Depois você paga pelo que usa: recargas de $10, $20, $50 ou $200, com pagamento único, e cada chamada a um modelo custa o dobro do que o provedor nos cobra. Modelos maiores gastam o crédito mais rápido; depois da primeira recarga você pode escolher qualquer um. O crédito não expira. Se ele acabar no meio do turno, o turno espera enquanto você recarrega.\n\nCom sua própria chave de API, você não precisa de conta nem de crédito. Você paga ao seu provedor pelo que o gerente lê e escreve.\n\nOu <a href="https://github.com/gulivan/worker755#run-it">rode o jogo por conta própria</a>.',
+          a: 'Ao entrar com o Google ou o GitHub na tela inicial, você ganha um crédito inicial, suficiente para uns dez turnos com o modelo padrão. Depois você paga pelo que usa: recargas de $10, $20, $50 ou $200, com pagamento único, e cada chamada a um modelo custa o dobro do que o provedor nos cobra. Modelos maiores gastam o crédito mais rápido; depois da primeira recarga você pode escolher qualquer um. O crédito não expira. Se ele acabar no meio do turno, o turno espera enquanto você recarrega.\n\nCom sua própria chave de API, você não precisa de conta nem de crédito. Você paga ao seu provedor pelo que o gerente lê e escreve.\n\nOu <a href="https://github.com/gulivan/worker755#run-it">rode o jogo por conta própria</a>.',
         },
         {
           id: 'providers',

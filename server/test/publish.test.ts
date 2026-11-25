@@ -673,3 +673,22 @@ test('a Runware key runs only the models offered for it, by their AIRs', async (
     assert.equal((await api('POST', '/api/sessions', { apiKey: KEY, provider: 'openrouter', model: 'c/three' })).status, 201);
   });
 });
+
+test("with a Runware key, shifts on the server's key run Runware's models there and the rest on the gateway", async () => {
+  const { hostedFor } = await import('../src/providers.ts');
+  const RUNWARE: Credentials = { provider: 'runware', apiKey: 'runware-key-0123456789abcdef' };
+  assert.equal(hostedFor('deepseek/deepseek-v4.1-flash', HOSTED, RUNWARE), RUNWARE);
+  assert.equal(hostedFor('openai/gpt-6-luna', HOSTED, RUNWARE), HOSTED);
+  assert.equal(hostedFor('deepseek/deepseek-v4.1-flash', HOSTED, null), HOSTED);
+  const rec = recorder();
+  const models = async () => [{ id: 'deepseek/deepseek-v4.1-flash', label: 'DeepSeek V4.1 Flash' }, ...MODELS];
+  const free = { sessionTokens: 1000, dailyTokens: 100_000, perAddressPerDay: 5, credentials: HOSTED, runware: RUNWARE };
+  await withApp({ driverFor: rec.driverFor, models, free }, async (api) => {
+    assert.equal((await api('POST', '/api/sessions', {})).status, 201);
+    assert.deepEqual(rec.models, ['deepseek/deepseek-v4.1-flash']);
+    assert.equal(rec.creds[0], RUNWARE);
+    // A player's own key is never swapped for the server's.
+    assert.equal((await api('POST', '/api/sessions', { apiKey: KEY, provider: 'gateway', model: 'deepseek/deepseek-v4.1-flash' })).status, 201);
+    assert.equal(rec.creds[1]?.apiKey, KEY);
+  });
+});

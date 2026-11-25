@@ -142,12 +142,13 @@ Everything is optional. See [.env.example](.env.example).
 | Variable | Default | |
 | --- | --- | --- |
 | `AI_GATEWAY_API_KEY` | | Turns on free shifts, paid from this key |
+| `RUNWARE_API_KEY` | | Shifts on the server's key run the models Runware offers (DeepSeek V4.1 Flash among them) on this key; other models stay on the gateway |
 | `FREE_MODELS` | first offered model | Models free shifts may use, comma separated |
 | `FREE_SHIFT_TOKENS` | 250000 | Without sign-in: token allowance per free shift (the review is always written) |
 | `FREE_DAILY_TOKENS` | 5000000 | Without sign-in: tokens per UTC day across all free shifts |
 | `FREE_SHIFTS_PER_DAY` | 3 | Without sign-in: free shifts per address per day |
 | `AUTH_SECRET` | | Turns on sign-in with Google or GitHub: shifts on the server's key are paid from the account's credit (see `.env.example`) |
-| `FREE_CREDIT_USD` | 0.25 | With sign-in: one-time starter credit, about one shift on DeepSeek V4.1 Flash |
+| `FREE_CREDIT_USD` | 0.5 | With sign-in: one-time starter credit, about a dozen shifts on DeepSeek V4.1 Flash. Raising it gives existing accounts the difference once |
 | `USAGE_MULTIPLIER` | 2 | With sign-in: what a model call costs the player, as a multiple of its price |
 | `MIN_START_USD` | 0.05 | With sign-in: credit needed to start a shift |
 | `FREEMIUS_TOPUPS` | | With sign-in: top-up plans as `<planId>:<dollars>,...`; also needs `FREEMIUS_PRODUCT_ID`, `FREEMIUS_PUBLIC_KEY`, `FREEMIUS_SECRET_KEY`, `FREEMIUS_API_KEY` |

@@ -56,7 +56,7 @@ const auth: AuthConfig | null = process.env.AUTH_SECRET
     }
   : null;
 if (auth) mkdirSync(dataDir, { recursive: true });
-const store = auth ? new Accounts(join(dataDir, 'accounts.db'), dollars(process.env.FREE_CREDIT_USD, 0.25)) : null;
+const store = auth ? new Accounts(join(dataDir, 'accounts.db'), dollars(process.env.FREE_CREDIT_USD, 0.5)) : null;
 const fm = process.env;
 const topUps = parseTopUps(fm.FREEMIUS_TOPUPS);
 const freemius =

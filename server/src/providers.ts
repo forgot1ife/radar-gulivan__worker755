@@ -178,6 +178,20 @@ export function hostedCredentials(): Credentials | null {
   return apiKey ? { provider: 'gateway', apiKey } : null;
 }
 
+/**
+ * The server's Runware key, when the operator set one: shifts on the server's key run the models
+ * Runware offers (DIRECT_MODELS.runware) there, and every other model on the gateway key.
+ */
+export function hostedRunware(): Credentials | null {
+  const apiKey = process.env.RUNWARE_API_KEY;
+  return apiKey ? { provider: 'runware', apiKey } : null;
+}
+
+/** Which of the server's keys runs this model: Runware when it has the model, else the gateway. */
+export function hostedFor(model: string, gateway: Credentials | null, runware: Credentials | null): Credentials | null {
+  return runware && DIRECT_MODELS.runware.some((m) => m.id === model) ? runware : gateway;
+}
+
 /** Model ids follow the gateway's names; OpenRouter spells a few vendors differently. */
 const OPENROUTER_VENDOR: Record<string, string> = { zai: 'z-ai' };
 

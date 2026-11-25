@@ -25,6 +25,9 @@ export interface Account {
   toppedUp: boolean;
 }
 
+/** The starter every account got before accounts kept their own: FREE_CREDIT_USD's old default, $0.25. */
+export const EARLIER_STARTER_MICROS = 250_000;
+
 /** How long a checkout may claim the license of a buyer with the same email. */
 const CLAIM_MS = 30 * 24 * 60 * 60_000;
 
@@ -89,6 +92,29 @@ export class Accounts {
       );
     `);
     this.migrate();
+    this.raiseStarter();
+  }
+
+  /**
+   * Each account keeps the starter it got. When the starter goes up (FREE_CREDIT_USD), every account
+   * that got less gets the difference once, as balance and as what "% left" counts from. It never
+   * goes down. Accounts from before this column got EARLIER_STARTER_MICROS.
+   */
+  private raiseStarter(): void {
+    const columns = (this.db.prepare('PRAGMA table_info(accounts)').all() as { name: string }[]).map((c) => c.name);
+    this.db.exec('BEGIN IMMEDIATE');
+    try {
+      if (!columns.includes('starter')) {
+        this.db.exec(`ALTER TABLE accounts ADD COLUMN starter INTEGER NOT NULL DEFAULT ${EARLIER_STARTER_MICROS}`);
+      }
+      this.db
+        .prepare('UPDATE accounts SET balance = balance + (? - starter), granted = granted + (? - starter), starter = ? WHERE starter < ?')
+        .run(this.starter, this.starter, this.starter, this.starter);
+      this.db.exec('COMMIT');
+    } catch (err) {
+      this.db.exec('ROLLBACK');
+      throw err;
+    }
   }
 
   /**
@@ -166,8 +192,8 @@ export class Accounts {
         id = randomBytes(12).toString('base64url');
         created = true;
         this.db
-          .prepare('INSERT INTO accounts (id, email, name, balance, granted, created_at) VALUES (?, ?, ?, ?, ?, ?)')
-          .run(id, email, name, this.starter, this.starter, this.now());
+          .prepare('INSERT INTO accounts (id, email, name, balance, granted, starter, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)')
+          .run(id, email, name, this.starter, this.starter, this.starter, this.now());
       }
       if (!known) this.db.prepare('INSERT INTO identities (provider, subject, account_id) VALUES (?, ?, ?)').run(provider, subject, id);
       if (name) this.db.prepare("UPDATE accounts SET name = ? WHERE id = ? AND name = ''").run(name, id);

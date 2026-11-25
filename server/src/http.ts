@@ -13,7 +13,7 @@ import type { ManagerDriver } from './manager.ts';
 import { freeModels, isModelId, keyModels, listModels, MOCK_MODEL } from './models.ts';
 import { isScenarioId, SCENARIO_LIST } from './scenarios.ts';
 import type { KeyProblem, ModelOption } from './models.ts';
-import { hostedCredentials, isPlausibleKey, isProviderId, listedOnly, localHeaders, localIsClaudeCode, localUrl, providerList } from './providers.ts';
+import { hostedCredentials, hostedFor, hostedRunware, isPlausibleKey, isProviderId, listedOnly, localHeaders, localIsClaudeCode, localUrl, providerList } from './providers.ts';
 import type { Credentials, ProviderId } from './providers.ts';
 import { parseSync, SYNC_BODY_CAP, SyncError } from './sync.ts';
 import { WEB } from './web.ts';
@@ -60,9 +60,10 @@ export interface AppOptions {
   directorFor?: (model: string, cred: Credentials | null) => DirectorDriver;
   /**
    * Free shifts on the server's key. Without it, players must bring their own key (unless mock).
-   * `credentials` defaults to AI_GATEWAY_API_KEY.
+   * `credentials` defaults to AI_GATEWAY_API_KEY; `runware` (default RUNWARE_API_KEY) runs the models
+   * Runware offers, when set.
    */
-  free?: { sessionTokens: number; dailyTokens: number; perAddressPerDay: number; credentials?: Credentials };
+  free?: { sessionTokens: number; dailyTokens: number; perAddressPerDay: number; credentials?: Credentials; runware?: Credentials | null };
   /** New shifts per address per hour, on any key. Default 30. */
   shiftsPerHour?: number;
   /** Read the client address from cf-connecting-ip (behind a trusted proxy). */
@@ -336,6 +337,9 @@ export function createApp(opts: AppOptions): App {
       opts.mock || !cred ? scriptedDirector(model) : createLiveDirector(model, cred));
   const idleMs = opts.idleMs ?? 60 * 60_000;
   const freeCred = opts.free ? (opts.free.credentials ?? hostedCredentials()) : null;
+  const freeRunware = opts.free ? (opts.free.runware === undefined ? hostedRunware() : opts.free.runware) : null;
+  /** The key a model runs on: the player's own, else the server's key for that model. */
+  const keyFor = (model: string, own: boolean, cred: Credentials | null) => (own ? cred : hostedFor(model, cred, freeRunware));
   const daily = opts.free ? new DailyBudget(opts.free.dailyTokens) : null;
   const freePerAddress = opts.free ? new RateLimiter(opts.free.perAddressPerDay, 24 * 60 * 60_000) : null;
   const shiftLimiter = new RateLimiter(opts.shiftsPerHour ?? 30, 60 * 60_000);
@@ -918,10 +922,10 @@ export function createApp(opts: AppOptions): App {
         }
         allowance = freeAllowance(opts.free.sessionTokens, daily);
       }
-      const director = directorId ? directorFor(directorId, cred) : undefined;
+      const director = directorId ? directorFor(directorId, keyFor(directorId, own, cred)) : undefined;
       const session = new Session({
         commandsPerWindow: opts.commandsPerWindow,
-        driver: driverFor(requested, cred),
+        driver: driverFor(requested, keyFor(requested, own, cred)),
         allowance,
         timeoutMs: opts.timeoutMs,
         allowSkip,
