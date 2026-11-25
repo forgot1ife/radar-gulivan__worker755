@@ -349,7 +349,7 @@ export const de: Catalogue = {
   'about.name': 'Der Name',
   'about.name.1': 'Bei Unix-Berechtigungen steht 755 für <code>rwxr-xr-x</code>: Der Besitzer darf schreiben, alle anderen nur lesen und ausführen. Genau so läuft es hier. Der Manager darf nur lesen; die Schreibarbeit erledigt der Subagent. Die Zahl wurde zufällig ausgewählt. Dass sie passt, ist reines Glück.',
   'about.keys': 'Schichten und Schlüssel',
-  'about.keys.1': 'Kostenlose Schichten laufen mit DeepSeek V4.1 Flash. Du kannst auch deinen eigenen Schlüssel für OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google oder Vertex AI mitbringen. Dein Schlüssel bleibt in deinem Browser. Der Server hält ihn nur während deiner Schicht im Arbeitsspeicher und speichert oder protokolliert ihn niemals.',
+  'about.keys.1': 'Kostenlose Schichten laufen mit DeepSeek V4.1 Flash, gesponsert von <a href="https://runware.ai">Runware</a>. Du kannst auch deinen eigenen Schlüssel für OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google, Vertex AI oder Runware mitbringen. Dein Schlüssel bleibt in deinem Browser. Der Server hält ihn nur während deiner Schicht im Arbeitsspeicher und speichert oder protokolliert ihn niemals.',
   'about.keys.2': 'Worker 755 wird größtenteils von KI-Agenten entwickelt, und die Arbeit geht noch weiter. Das erklärt einige Entscheidungen.',
   'about.credits': 'Mitwirkende',
   'about.credits.intro': 'Worker 755 baut auf Open-Source-Arbeit auf. Die Leute dahinter haben die harte Arbeit erledigt, und niemand hat ihnen 90 Sekunden spendiert.',

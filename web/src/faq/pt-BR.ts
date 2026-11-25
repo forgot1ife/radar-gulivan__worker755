@@ -95,7 +95,7 @@ export const ptBR: Faq = {
         {
           id: 'providers',
           q: 'Quais chaves posso usar?',
-          a: 'OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google e Vertex AI. Escolha o provedor na tela inicial e cole a chave. O jogo verifica a chave com o provedor e lista os modelos disponíveis.',
+          a: 'OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google, Vertex AI e Runware. Escolha o provedor na tela inicial e cole a chave. O jogo verifica a chave com o provedor e lista os modelos disponíveis.',
         },
         {
           id: 'key',

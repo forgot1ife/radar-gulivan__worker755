@@ -349,7 +349,7 @@ export const ptBR: Catalogue = {
   'about.name': 'O nome',
   'about.name.1': 'Nas permissões do Unix, 755 é <code>rwxr-xr-x</code>: o dono pode escrever; todo mundo só pode ler e executar. É assim que funciona por aqui. O gerente só pode ler; quem faz todo o trabalho de escrita é o subagente. O número foi escolhido ao acaso. A combinação foi sorte.',
   'about.keys': 'Turnos e chaves',
-  'about.keys.1': 'Os turnos grátis rodam no DeepSeek V4.1 Flash. Você também pode usar sua própria chave da OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google ou Vertex AI. Sua chave fica no navegador. O servidor a mantém na memória só durante o seu turno e nunca a armazena nem registra em logs.',
+  'about.keys.1': 'Os turnos grátis rodam no DeepSeek V4.1 Flash, patrocinados pela <a href="https://runware.ai">Runware</a>. Você também pode usar sua própria chave da OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google, Vertex AI ou Runware. Sua chave fica no navegador. O servidor a mantém na memória só durante o seu turno e nunca a armazena nem registra em logs.',
   'about.keys.2': 'Worker 755 está sendo desenvolvido principalmente por agentes de IA, e o trabalho continua. Isso explica algumas decisões.',
   'about.credits': 'Créditos',
   'about.credits.intro': 'Worker 755 se apoia em projetos de código aberto. Quem está por trás deles fez o trabalho pesado — e ninguém lhes deu 90 segundos.',

@@ -95,7 +95,7 @@ export const hi: Faq = {
         {
           id: 'providers',
           q: 'मैं कौन-सी कुंजियाँ इस्तेमाल कर सकता हूँ?',
-          a: 'OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google और Vertex AI। शुरुआती स्क्रीन पर प्रोवाइडर चुनो और कुंजी पेस्ट करो। गेम प्रोवाइडर से उसकी जाँच करेगा और उन मॉडलों की सूची दिखाएगा जिन्हें वह चला सकती है।',
+          a: 'OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google, Vertex AI और Runware। शुरुआती स्क्रीन पर प्रोवाइडर चुनो और कुंजी पेस्ट करो। गेम प्रोवाइडर से उसकी जाँच करेगा और उन मॉडलों की सूची दिखाएगा जिन्हें वह चला सकती है।',
         },
         {
           id: 'key',

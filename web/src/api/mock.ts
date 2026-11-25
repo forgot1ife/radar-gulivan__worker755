@@ -316,6 +316,7 @@ export function createMockClient(): GameClient {
         providers: [
           { id: 'openrouter', label: 'OpenRouter', keyUrl: 'https://openrouter.ai/settings/keys' },
           { id: 'gateway', label: 'Vercel AI Gateway', keyUrl: 'https://vercel.com/' },
+          { id: 'runware', label: 'Runware', keyUrl: 'https://runware.ai/api-keys' },
         ],
         donateUrl: '',
         sourceUrl: '',

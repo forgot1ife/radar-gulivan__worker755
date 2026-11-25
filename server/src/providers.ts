@@ -12,7 +12,7 @@ import { createOpenAI } from '@ai-sdk/openai';
 import { createDeepSeek } from '@ai-sdk/deepseek';
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
 
-export type ProviderId = 'gateway' | 'openrouter' | 'anthropic' | 'openai' | 'deepseek' | 'google' | 'vertex' | 'local';
+export type ProviderId = 'gateway' | 'openrouter' | 'anthropic' | 'openai' | 'deepseek' | 'google' | 'vertex' | 'runware' | 'local';
 
 export interface ProviderInfo {
   id: ProviderId;
@@ -32,6 +32,7 @@ export const PROVIDERS: ProviderInfo[] = [
   { id: 'deepseek', label: 'DeepSeek', keyUrl: 'https://platform.deepseek.com/api_keys' },
   { id: 'google', label: 'Google', keyUrl: 'https://aistudio.google.com/apikey' },
   { id: 'vertex', label: 'Vertex AI', keyUrl: 'https://cloud.google.com/vertex-ai/generative-ai/docs/start/express-mode/overview' },
+  { id: 'runware', label: 'Runware', keyUrl: 'https://runware.ai/api-keys' },
 ];
 
 /**
@@ -39,7 +40,7 @@ export const PROVIDERS: ProviderInfo[] = [
  * spelling everywhere in the game; `native` is what the vendor's own API calls them (checked
  * against each API's model list on 2026-11-11).
  */
-export const DIRECT_MODELS: Record<'anthropic' | 'openai' | 'deepseek' | 'google' | 'vertex', { id: string; native: string; label: string }[]> = {
+export const DIRECT_MODELS: Record<'anthropic' | 'openai' | 'deepseek' | 'google' | 'vertex' | 'runware', { id: string; native: string; label: string }[]> = {
   anthropic: [
     { id: 'anthropic/claude-haiku-5.5', native: 'claude-haiku-5-5', label: 'Claude Haiku 5.5' },
     { id: 'anthropic/claude-sonnet-5.5', native: 'claude-sonnet-5-5', label: 'Claude Sonnet 5.5' },
@@ -67,10 +68,17 @@ export const DIRECT_MODELS: Record<'anthropic' | 'openai' | 'deepseek' | 'google
     { id: 'google/gemini-4-carbon', native: 'gemini-4-carbon', label: 'Gemini 4 Carbon' },
     { id: 'google/gemini-4-neon', native: 'gemini-4-neon', label: 'Gemini 4 Neon' },
   ],
+  // Runware names models by AIR. Each of these played whole shifts there on 2026-11-24, review included.
+  runware: [
+    { id: 'anthropic/claude-haiku-5.5', native: 'anthropic:claude@haiku-5.5', label: 'Claude Haiku 5.5' },
+    { id: 'deepseek/deepseek-v4.1-flash', native: 'deepseek:v4.1@flash', label: 'DeepSeek V4.1 Flash' },
+    { id: 'zai/glm-5.3-flash', native: 'zai:glm@5.3-flash', label: 'GLM 5.3 Flash' },
+    { id: 'moonshotai/kimi-k3', native: 'moonshotai:kimi@k3', label: 'Kimi K3' },
+  ],
 };
 
-export function isDirect(p: ProviderId): p is 'anthropic' | 'openai' | 'deepseek' | 'google' | 'vertex' {
-  return p === 'anthropic' || p === 'openai' || p === 'deepseek' || p === 'google' || p === 'vertex';
+export function isDirect(p: ProviderId): p is 'anthropic' | 'openai' | 'deepseek' | 'google' | 'vertex' | 'runware' {
+  return p === 'anthropic' || p === 'openai' || p === 'deepseek' || p === 'google' || p === 'vertex' || p === 'runware';
 }
 
 export const VERTEX_EXPRESS_BASE_URL = 'https://aiplatform.googleapis.com/v1/publishers/google';
@@ -92,6 +100,15 @@ export function vertexBaseUrl(): string {
         ? `aiplatform.${loc}.rep.googleapis.com`
         : `${loc}-aiplatform.googleapis.com`;
   return `https://${host}/v1/projects/${project}/locations/${loc}/publishers/google`;
+}
+
+/**
+ * True when a player's key may run only the models offered for its provider, not any id the
+ * provider knows. A Runware key serves many chat models, and only the ones listed here were
+ * checked with whole shifts.
+ */
+export function listedOnly(p: ProviderId | undefined): boolean {
+  return p === 'runware';
 }
 
 export interface Credentials {
@@ -197,6 +214,10 @@ export function languageModel(cred: Credentials, id: string): LanguageModel {
   if (cred.provider === 'google') return createGoogleGenerativeAI({ apiKey: cred.apiKey })(providerModelId('google', id));
   if (cred.provider === 'vertex') {
     return createGoogleGenerativeAI({ apiKey: cred.apiKey, baseURL: vertexBaseUrl() })(providerModelId('vertex', id));
+  }
+  // Runware's OpenAI-compatible chat completions; a bare createOpenAI() model would use the Responses API.
+  if (cred.provider === 'runware') {
+    return createOpenAI({ baseURL: 'https://api.runware.ai/v1', apiKey: cred.apiKey }).chat(providerModelId('runware', id));
   }
   return createGateway({ apiKey: cred.apiKey })(id);
 }

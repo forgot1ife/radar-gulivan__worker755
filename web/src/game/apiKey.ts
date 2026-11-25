@@ -9,10 +9,13 @@ export interface SavedKey {
   apiKey: string;
 }
 
+/** Preselected for a player with no saved key. Runware sponsors the free shifts. */
+export const DEFAULT_PROVIDER: Provider = 'runware';
+
 export function loadKey(): SavedKey | null {
   try {
     const v = JSON.parse(localStorage.getItem(KEY) ?? 'null') as Partial<SavedKey> | null;
-    const providers: Provider[] = ['openrouter', 'gateway', 'anthropic', 'openai', 'deepseek', 'google', 'vertex'];
+    const providers: Provider[] = ['openrouter', 'gateway', 'anthropic', 'openai', 'deepseek', 'google', 'vertex', 'runware'];
     if (v && v.provider && providers.includes(v.provider) && typeof v.apiKey === 'string' && v.apiKey) {
       return { provider: v.provider, apiKey: v.apiKey };
     }

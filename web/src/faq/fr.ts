@@ -95,7 +95,7 @@ export const fr: Faq = {
         {
           id: 'providers',
           q: 'Quelles clés puis-je utiliser ?',
-          a: 'OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google et Vertex AI. Choisis le fournisseur sur l’écran de démarrage et colle ta clé. Le jeu la vérifie auprès du fournisseur et affiche les modèles disponibles.',
+          a: 'OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google, Vertex AI et Runware. Choisis le fournisseur sur l’écran de démarrage et colle ta clé. Le jeu la vérifie auprès du fournisseur et affiche les modèles disponibles.',
         },
         {
           id: 'key',

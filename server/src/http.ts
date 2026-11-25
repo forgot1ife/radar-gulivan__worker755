@@ -13,7 +13,7 @@ import type { ManagerDriver } from './manager.ts';
 import { freeModels, isModelId, keyModels, listModels, MOCK_MODEL } from './models.ts';
 import { isScenarioId, SCENARIO_LIST } from './scenarios.ts';
 import type { KeyProblem, ModelOption } from './models.ts';
-import { hostedCredentials, isPlausibleKey, isProviderId, localHeaders, localIsClaudeCode, localUrl, providerList } from './providers.ts';
+import { hostedCredentials, isPlausibleKey, isProviderId, listedOnly, localHeaders, localIsClaudeCode, localUrl, providerList } from './providers.ts';
 import type { Credentials, ProviderId } from './providers.ts';
 import { parseSync, SYNC_BODY_CAP, SyncError } from './sync.ts';
 import { WEB } from './web.ts';
@@ -320,8 +320,12 @@ export function createApp(opts: AppOptions): App {
   const log = opts.log ?? ((line: string) => console.log(line));
   const models = opts.models ?? (opts.mock ? async () => [MOCK_MODEL] : listModels);
   const checkKey = opts.keyModels ?? (opts.mock ? async () => ({ models: [MOCK_MODEL] }) : keyModels);
-  /** With their own key a player may pick any model their provider lists; the provider has the last word. */
-  const offered = (list: ModelOption[], id: string, own: boolean) => list.some((m) => m.id === id) || (own && isModelId(id));
+  /**
+   * With their own key a player may pick any model their provider lists; the provider has the last word.
+   * A provider that runs only its listed models (listedOnly) gets nothing else.
+   */
+  const offered = (list: ModelOption[], id: string, own: boolean, provider?: ProviderId) =>
+    list.some((m) => m.id === id) || (own && !listedOnly(provider) && isModelId(id));
   const driverFor =
     opts.driverFor ??
     ((model: string, cred: Credentials | null) =>
@@ -879,7 +883,7 @@ export function createApp(opts: AppOptions): App {
       }
       const requested = typeof body.model === 'string' && body.model ? body.model : list[0]?.id;
       if (!requested) throw new HttpError(503, 'No manager model is available');
-      if (!offered(list, requested, own)) throw new HttpError(400, `Unknown model: ${requested}`);
+      if (!offered(list, requested, own, cred?.provider)) throw new HttpError(400, `Unknown model: ${requested}`);
       const allowSkip = body.allowSkip === true;
       const allowQuit = body.allowQuit === true;
       const goalsOnly = body.goalsOnly === true;
@@ -893,7 +897,7 @@ export function createApp(opts: AppOptions): App {
       const language = isLanguage(body.language) ? body.language : 'en';
       // '' or 'scripted' keeps the scripted lines; any offered model writes the user's messages instead.
       const directorId = typeof body.director === 'string' && body.director !== 'scripted' ? body.director : '';
-      if (directorId && !offered(list, directorId, own)) throw new HttpError(400, `Unknown model: ${directorId}`);
+      if (directorId && !offered(list, directorId, own, cred?.provider)) throw new HttpError(400, `Unknown model: ${directorId}`);
       // Limits are counted only for requests that would start a shift.
       const address = clientAddress(req);
       let open = 0;
@@ -1008,7 +1012,7 @@ export function createApp(opts: AppOptions): App {
       const cred = playerCredentials(req, body, s.copy.errors);
       const list = await models(cred.provider);
       const requested = typeof body.model === 'string' && body.model ? body.model : list[0]?.id;
-      if (!requested || !offered(list, requested, true)) throw new HttpError(400, `Unknown model: ${requested ?? ''}`);
+      if (!requested || !offered(list, requested, true, cred.provider)) throw new HttpError(400, `Unknown model: ${requested ?? ''}`);
       // The user's messages stay with the model that wrote them when the key's provider has it.
       const state = s.state();
       const director = state.director && list.some((m) => m.id === state.director) ? directorFor(state.director, cred) : null;

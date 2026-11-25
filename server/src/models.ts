@@ -278,6 +278,11 @@ async function fetchKeyModels(cred: Credentials): Promise<ModelOption[]> {
       if (authProblem) throw new KeyCheckError(authProblem);
       throw new KeyCheckError(sawDown ? 'down' : 'key');
     }
+    case 'runware': {
+      // The list checks the key. A Runware key runs only the models offered for it (see listedOnly).
+      await getJson('https://api.runware.ai/v1/models', bearer);
+      return DIRECT_MODELS.runware.map(({ id, label }) => ({ id, label }));
+    }
   }
 }
 

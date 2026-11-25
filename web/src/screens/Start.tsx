@@ -7,7 +7,7 @@ import type { Character, ModelList, Provider, Workplace } from '../api/types';
 import { rememberLabels } from '../game/labels';
 import { BotAvatar } from '../components/BotAvatar';
 import { loadFace, randomFace, saveFace } from '../game/avatar';
-import { loadKey, loadPicks, saveKey, savePicks } from '../game/apiKey';
+import { DEFAULT_PROVIDER, loadKey, loadPicks, saveKey, savePicks } from '../game/apiKey';
 import { useLanyard } from '../game/useLanyard';
 import { KeyCheckRow, ModelOptions, useKeyCheck } from '../components/KeyCheck';
 import { ClaudeCodeAuth } from '../components/ClaudeCodeAuth';
@@ -53,7 +53,7 @@ export function Start({ onStart }: Props) {
   };
   const [saved] = useState(loadKey);
   const [access, setAccess] = useState<Access>(saved ? 'own' : 'free');
-  const [provider, setProvider] = useState<Provider>(saved?.provider ?? 'openrouter');
+  const [provider, setProvider] = useState<Provider>(saved?.provider ?? DEFAULT_PROVIDER);
   const [apiKey, setApiKey] = useState(saved?.apiKey ?? '');
   const [remember, setRemember] = useState(!!saved);
   /** Whether free shifts are on offer; assumed until the server says otherwise. */
@@ -480,6 +480,7 @@ export function Start({ onStart }: Props) {
                     {(models?.providers ?? [
                       { id: 'openrouter', label: 'OpenRouter' },
                       { id: 'gateway', label: 'Vercel AI Gateway' },
+                      { id: 'runware', label: 'Runware' },
                     ]).map((p) => (
                       <option key={p.id} value={p.id}>
                         {p.label}

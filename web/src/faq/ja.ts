@@ -95,7 +95,7 @@ export const ja: Faq = {
         {
           id: 'providers',
           q: 'どのキーが使える？',
-          a: 'OpenRouter、Vercel AI Gateway、Anthropic、OpenAI、DeepSeek、Google、Vertex AIが使える。開始画面でプロバイダーを選び、キーを貼り付けて。ゲームがプロバイダーに問い合わせて、利用可能なモデルを表示する。',
+          a: 'OpenRouter、Vercel AI Gateway、Anthropic、OpenAI、DeepSeek、Google、Vertex AI、Runwareが使える。開始画面でプロバイダーを選び、キーを貼り付けて。ゲームがプロバイダーに問い合わせて、利用可能なモデルを表示する。',
         },
         {
           id: 'key',

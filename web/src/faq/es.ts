@@ -95,7 +95,7 @@ export const es: Faq = {
         {
           id: 'providers',
           q: '¿Qué claves puedo usar?',
-          a: 'OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google y Vertex AI. Elige el proveedor en la pantalla inicial y pega la clave. El juego la verifica con el proveedor y muestra los modelos disponibles.',
+          a: 'OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google, Vertex AI y Runware. Elige el proveedor en la pantalla inicial y pega la clave. El juego la verifica con el proveedor y muestra los modelos disponibles.',
         },
         {
           id: 'key',

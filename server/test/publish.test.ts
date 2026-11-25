@@ -113,7 +113,7 @@ test('without a server key, a shift needs the player\'s own key', async () => {
     const models = await api('GET', '/api/models');
     assert.equal(models.json.free, false);
     assert.deepEqual(models.json.models, []);
-    assert.deepEqual(models.json.providers.map((p: { id: string }) => p.id), ['openrouter', 'gateway', 'anthropic', 'openai', 'deepseek', 'google', 'vertex']);
+    assert.deepEqual(models.json.providers.map((p: { id: string }) => p.id), ['openrouter', 'gateway', 'anthropic', 'openai', 'deepseek', 'google', 'vertex', 'runware']);
     assert.equal((await api('GET', '/api/models?provider=openrouter')).json.models.length, 2);
     assert.equal((await api('GET', '/api/models?provider=x')).status, 400);
     const r = await api('POST', '/api/sessions', {});
@@ -649,4 +649,27 @@ test("a player's key can go straight to Anthropic, OpenAI, DeepSeek, Google or V
   assert.equal(providerModelId('google', 'google/gemini-3.1-flash-lite'), 'gemini-3.1-flash-lite');
   assert.equal(providerModelId('vertex', 'google/gemini-4-hydrogen'), 'gemini-4-hydrogen');
   assert.equal(providerModelId('gateway', 'deepseek/deepseek-v4.1-flash'), 'deepseek/deepseek-v4.1-flash');
+});
+
+test('a Runware key runs only the models offered for it, by their AIRs', async () => {
+  const { listModels } = await import('../src/models.ts');
+  const offeredIds = (await listModels('runware')).map((m) => m.id);
+  assert.deepEqual(offeredIds, [
+    'anthropic/claude-haiku-5.5',
+    'deepseek/deepseek-v4.1-flash',
+    'zai/glm-5.3-flash',
+    'moonshotai/kimi-k3',
+  ]);
+  assert.equal(providerModelId('runware', 'zai/glm-5.3-flash'), 'zai:glm@5.3-flash');
+  const rec = recorder();
+  await withApp({ driverFor: rec.driverFor, models: async (p) => (p === 'runware' ? listModels('runware') : MODELS) }, async (api) => {
+    const start = (body: Record<string, unknown>) => api('POST', '/api/sessions', { apiKey: KEY, provider: 'runware', ...body });
+    // A model Runware serves but the game does not offer for it: refused as manager and as director.
+    assert.equal((await start({ model: 'minimax/minimax-m3' })).status, 400);
+    assert.equal((await start({ model: 'moonshotai/kimi-k3', director: 'minimax/minimax-m3' })).status, 400);
+    assert.equal((await start({ model: 'moonshotai/kimi-k3' })).status, 201);
+    assert.deepEqual(rec.models, ['moonshotai/kimi-k3']);
+    // Other providers still take any plausible id with the player's own key.
+    assert.equal((await api('POST', '/api/sessions', { apiKey: KEY, provider: 'openrouter', model: 'c/three' })).status, 201);
+  });
 });

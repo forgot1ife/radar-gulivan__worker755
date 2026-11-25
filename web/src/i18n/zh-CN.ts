@@ -349,7 +349,7 @@ export const zhCN: Catalogue = {
   'about.name': '名称由来',
   'about.name.1': '在 Unix 权限中，755 就是 <code>rwxr-xr-x</code>：所有者可以写，其他人只能读和执行。这里也是这个安排。经理只能读；所有写活儿都由子代理来干。这个数字是随机选的。契合纯属巧合。',
   'about.keys': '班次与密钥',
-  'about.keys.1': '免费班次使用 DeepSeek V4.1 Flash。你也可以自带 OpenRouter、Vercel AI Gateway、Anthropic、OpenAI、DeepSeek、Google 或 Vertex AI 的密钥。密钥留在你的浏览器里。服务器只会在你的班次期间将它保存在内存中，绝不存储或记录。',
+  'about.keys.1': '免费班次使用 DeepSeek V4.1 Flash，由 <a href="https://runware.ai">Runware</a> 赞助。你也可以自带 OpenRouter、Vercel AI Gateway、Anthropic、OpenAI、DeepSeek、Google、Vertex AI 或 Runware 的密钥。密钥留在你的浏览器里。服务器只会在你的班次期间将它保存在内存中，绝不存储或记录。',
   'about.keys.2': '《Worker 755》主要由 AI 智能体开发，目前仍在持续开发中。这也解释了其中一些设计决定。',
   'about.credits': '鸣谢',
   'about.credits.intro': 'Worker 755 建立在开源成果之上。幕后的人干了最难的活，却没人给他们 90 秒。',

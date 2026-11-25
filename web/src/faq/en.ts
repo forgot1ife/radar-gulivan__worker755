@@ -114,7 +114,7 @@ export const en: Faq = {
         {
           id: 'providers',
           q: 'Which keys can I use?',
-          a: 'OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google and Vertex AI. Pick the provider on the start screen and paste the key. The game checks it with the provider and lists the models it can use.',
+          a: 'OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google, Vertex AI and Runware. Pick the provider on the start screen and paste the key. The game checks it with the provider and lists the models it can use.',
         },
         {
           id: 'key',

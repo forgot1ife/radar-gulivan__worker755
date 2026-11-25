@@ -95,7 +95,7 @@ export const zhCN: Faq = {
         {
           id: 'providers',
           q: '我能用哪些密钥？',
-          a: 'OpenRouter、Vercel AI Gateway、Anthropic、OpenAI、DeepSeek、Google 和 Vertex AI。在开始界面选择服务商并粘贴密钥即可。游戏会向服务商验证密钥，并列出可用的模型。',
+          a: 'OpenRouter、Vercel AI Gateway、Anthropic、OpenAI、DeepSeek、Google、Vertex AI 和 Runware。在开始界面选择服务商并粘贴密钥即可。游戏会向服务商验证密钥，并列出可用的模型。',
         },
         {
           id: 'key',

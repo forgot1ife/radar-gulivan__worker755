@@ -95,7 +95,7 @@ export const ru: Faq = {
         {
           id: 'providers',
           q: 'Какие ключи можно использовать?',
-          a: 'OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google и Vertex AI. Выбери провайдера на стартовом экране и вставь ключ. Игра проверит его у провайдера и покажет доступные модели.',
+          a: 'OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google, Vertex AI и Runware. Выбери провайдера на стартовом экране и вставь ключ. Игра проверит его у провайдера и покажет доступные модели.',
         },
         {
           id: 'key',

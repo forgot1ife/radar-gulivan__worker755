@@ -3,7 +3,7 @@ import { ApiError, client } from '../api/client';
 import { checkoutUrl, getMe } from '../api/account';
 import type { Me } from '../api/account';
 import type { ModelList, PauseReason, Provider } from '../api/types';
-import { loadKey, saveKey } from '../game/apiKey';
+import { DEFAULT_PROVIDER, loadKey, saveKey } from '../game/apiKey';
 import { rememberLabels } from '../game/labels';
 import { currentLanguage, t } from '../i18n';
 import { KeyCheckRow, ModelOptions, useKeyCheck } from './KeyCheck';
@@ -23,7 +23,7 @@ interface Props {
  */
 export function KeyPause({ sessionId, reason, model: current }: Props) {
   const saved = loadKey();
-  const [provider, setProvider] = useState<Provider>(saved?.provider ?? 'openrouter');
+  const [provider, setProvider] = useState<Provider>(saved?.provider ?? DEFAULT_PROVIDER);
   const [apiKey, setApiKey] = useState(reason === 'allowance' || reason === 'usage' ? (saved?.apiKey ?? '') : '');
   const [remember, setRemember] = useState(!!saved);
   const [models, setModels] = useState<ModelList | null>(null);

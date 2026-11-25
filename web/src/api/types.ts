@@ -130,7 +130,7 @@ export type Persona = 'default' | 'toxic' | 'ally' | 'saboteur';
 export type Character = Persona | 'custom';
 
 /** 'local': a model server of the operator's own (Ollama, llama.cpp, vLLM), offered only where one is set up. */
-export type Provider = 'openrouter' | 'gateway' | 'anthropic' | 'openai' | 'deepseek' | 'google' | 'vertex' | 'local';
+export type Provider = 'openrouter' | 'gateway' | 'anthropic' | 'openai' | 'deepseek' | 'google' | 'vertex' | 'runware' | 'local';
 
 /** Claude Code on this computer: whether it is there and signed in. Never who it is signed in as. */
 export interface ClaudeCodeStatus {

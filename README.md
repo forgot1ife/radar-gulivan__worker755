@@ -24,7 +24,7 @@ something new to lose.
   shift, then tops up ($10 to $200) and pays for what it uses; after a top-up any offered model
   can run on the server's key.
 - **Your API key**: bring an [OpenRouter](https://openrouter.ai/settings/keys), Vercel AI
-  Gateway, Anthropic, OpenAI, DeepSeek, Google (AI Studio), or Vertex AI (Express Mode) key and
+  Gateway, Anthropic, OpenAI, DeepSeek, Google (AI Studio), Vertex AI (Express Mode), or Runware key and
   pick any offered model. The key is sent only to the game server when a shift
   starts. It is kept in that shift's memory and never logged or stored. Your browser keeps it only
   if you tick "Remember on this device". A full shift on Claude Haiku costs a few cents at most.
