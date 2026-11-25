@@ -349,7 +349,7 @@ export const ru: Catalogue = {
   'about.name': 'Название',
   'about.name.1': 'В правах Unix 755 — это <code>rwxr-xr-x</code>: владелец может записывать, остальные — только читать и запускать. Здесь всё устроено так же. Менеджер умеет только читать; всю запись делает субагент. Число выбрали случайно. Совпадение оказалось удачным.',
   'about.keys': 'Смены и ключи',
-  'about.keys.1': 'Бесплатные смены работают на DeepSeek V4.1 Flash при поддержке <a href="https://runware.ai">Runware</a>. Можно также использовать свой ключ для OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google, Vertex AI или Runware. Ключ остаётся в браузере. Сервер держит его в памяти только на время смены и никогда не сохраняет и не записывает в логи.',
+  'about.keys.1': 'Бесплатные смены работают на DeepSeek V4.1 Flash при поддержке <a href="https://runware.ai/?utm_source=github&utm_medium=referral&utm_campaign=worker755">Runware</a>. Можно также использовать свой ключ для OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google, Vertex AI или Runware. Ключ остаётся в браузере. Сервер держит его в памяти только на время смены и никогда не сохраняет и не записывает в логи.',
   'about.keys.2': 'Worker 755 в основном создают ИИ-агенты, и работа ещё продолжается. Это объясняет некоторые решения.',
   'about.credits': 'Благодарности',
   'about.credits.intro': 'Worker 755 стоит на плечах опенсорса. Люди, которые за ним стоят, проделали всю сложную работу — и никто не дал им на это 90 секунд.',

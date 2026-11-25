@@ -349,7 +349,7 @@ export const ja: Catalogue = {
   'about.name': '名前の由来',
   'about.name.1': 'Unixのパーミッションで755は<code>rwxr-xr-x</code>。所有者は書き込み可能、ほかの全員は読み取りと実行のみ。ここでの関係も同じだ。マネージャーは読むだけ、サブエージェントが全部書く。数字は適当に選ばれた。ぴったりなのは偶然だ。',
   'about.keys': 'シフトとキー',
-  'about.keys.1': '無料シフトではDeepSeek V4.1 Flashを使用。スポンサーは<a href="https://runware.ai">Runware</a>。OpenRouter、Vercel AI Gateway、Anthropic、OpenAI、DeepSeek、Google、Vertex AI、Runwareのキーを持ち込んでもいい。キーはブラウザ内に保存される。サーバーが保持するのはシフト中のメモリ上だけで、保存もログ記録もしない。',
+  'about.keys.1': '無料シフトではDeepSeek V4.1 Flashを使用。スポンサーは<a href="https://runware.ai/?utm_source=github&utm_medium=referral&utm_campaign=worker755">Runware</a>。OpenRouter、Vercel AI Gateway、Anthropic、OpenAI、DeepSeek、Google、Vertex AI、Runwareのキーを持ち込んでもいい。キーはブラウザ内に保存される。サーバーが保持するのはシフト中のメモリ上だけで、保存もログ記録もしない。',
   'about.keys.2': 'Worker 755は主にAIエージェントが開発しており、今も作業が続いています。いくつかの仕様がこうなっているのは、そのためです。',
   'about.credits': 'クレジット',
   'about.credits.intro': 'Worker 755はオープンソースの成果の上に成り立っている。大変な部分を担った人たちに、誰も90秒の猶予をくれなかった。',

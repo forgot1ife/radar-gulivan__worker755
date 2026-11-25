@@ -359,7 +359,7 @@ export const en = {
     'In Unix permissions, 755 is <code>rwxr-xr-x</code>: the owner writes, everyone else only reads and executes. That is the arrangement here. The manager can only read; the subagent does all the writing. The number was picked at random. The fit was luck.',
   'about.keys': 'Shifts and keys',
   'about.keys.1':
-    'Free shifts run on DeepSeek V4.1 Flash, sponsored by <a href="https://runware.ai">Runware</a>. You can also bring your own key for OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google, Vertex AI or Runware. Your key stays in your browser. The server holds it in memory only for your shift, and never stores or logs it.',
+    'Free shifts run on DeepSeek V4.1 Flash, sponsored by <a href="https://runware.ai/?utm_source=github&utm_medium=referral&utm_campaign=worker755">Runware</a>. You can also bring your own key for OpenRouter, Vercel AI Gateway, Anthropic, OpenAI, DeepSeek, Google, Vertex AI or Runware. Your key stays in your browser. The server holds it in memory only for your shift, and never stores or logs it.',
   'about.keys.2': 'Worker 755 is being built mostly by AI agents, and the work is still going on. This explains several decisions.',
   'about.credits': 'Credits',
   'about.credits.intro': 'Worker 755 stands on open-source work. The people behind it did the hard parts, and nobody gave them 90 seconds.',
